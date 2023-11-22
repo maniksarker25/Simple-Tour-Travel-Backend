@@ -1,0 +1,126 @@
+Entities : 
+User 
+Tour
+Locations
+Review
+Booking
+
+Collections
+User  
+{
+    id : 1
+    name : "Rahul",
+    email : "e@gmail.com",
+    profile : 
+    review : [ -> Embedding
+        {
+            review : "good",
+            rating : 4.5,
+        },
+        {
+            review : "good",
+            rating : 4.5,
+        }
+    ]
+
+
+    booking : [ -> child referencing
+        ObjectId("1d3dfw3d)
+        ObjectId("1d3dfw3d)
+        ObjectId("1d3dfw3d)
+    ]
+} 
+
+Booking  
+{
+    id : 1
+    tourName : "Dhaka-Cox's Bazar",
+    userId : 1 -> referencing : parent referencing
+} 
+
+
+Tour
+{
+    locations : [
+        {
+            area : "ST. Martin"
+        }
+    ]
+}
+Embedding vs Referencing
+Referencing: 
+
+
+2 way Referencing : modified child referencing
+
+Movie : 
+{
+ id : 1,
+ name : "Loki",
+ actors : [
+    ObjectId("1d3dfw3d)
+    ObjectId("1d3dfw3d)
+    ObjectId("1d3dfw3d)
+    ObjectId("1d3dfw3d)
+ ]
+}
+
+Actor :
+{ - BSON Document = max limit = 16megabyte
+    id : 1,
+    name : "Tom Hiddleston",
+    movies: [
+        ObjectId("1d3dfw3d)
+        ObjectId("1d3dfw3d)
+        ObjectId("1d3dfw3d)
+        ObjectId("1d3dfw3d)
+    ]
+}
+
+
+Relation of Database:
+1. One to One = user : profile  : embedding : referencing
+2. One to Many / Many to One = User : Order
+//Only for mongodb
+    a.One to Few : User : [Order1, Order2, Order3, ...... 50>] : Embedding/Referencing
+    b. One to Many : User : [Comment1, .....100000] : Referencing : Child / Parent referencing
+    c. One to Tons : User : Chat ["Hi", "Hello"] Parent Referencing
+3. Many to Many = Actor : Movie : 2 Way Referencing
+
+
+//Choosing reference/ embedding
+
+Tour : {
+    location ; [ -> Embedding
+        {
+            area : "ST. Martin"
+        }
+        {
+
+        }
+    ]
+
+    reviews : [
+    ObjectId ("1d3dfw3d)
+    ObjectId ("1d3dfw3d)
+    ObjectId ("1d3dfw3d)
+    ]
+}
+
+Booking : { -> parent reference
+    id : 1
+    userId : 1
+}
+
+User {
+    //temon referencing nai
+}
+
+Review : { -> parent refrencing
+    id: 1,
+    tourId: 1
+    userId: 1
+}
+
+
+collection er closness
